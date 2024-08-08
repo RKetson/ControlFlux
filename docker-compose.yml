@@ -1,29 +1,40 @@
-version: '3'
-
 services:
-  nodered:
-    build: .
-    container_name: nodered
+  mongo:
+    image: mongo:4.2.18
+    container_name: mongo
     ports:
-      - "1880:1880"
+      - 27017:27017
     volumes:
-      - node_red_data:/data/node-red
-    depends_on:
-      - mysql
-
-  mysql:
-    image: mysql:8
-    container_name: mysql
+      - mongo-volume:/data/db
+    networks:
+      - rede-controlflux
+    restart: always
+    command: ["mongod", "--bind_ip", "0.0.0.0"]
+  mongo-express:
+    image: mongo-express:1.0.2-20-alpine3.19
+    container_name: mongo-express
+    ports:
+      - 8081:8081
+    networks:
+      - rede-controlflux
+    restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: mydatabase
-      MYSQL_USER: myuser
-      MYSQL_PASSWORD: mypassword
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=pass
+  node-red:
+    image: nodered/node-red:4.0.2-22
+    container_name: app
     ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-
+      - 1880:1880
+    environment:
+      - MONGODB=mongo
+    networks:
+      - rede-controlflux
+    restart: always
 volumes:
-  node_red_data:
-  mysql_data:
+  mongo-volume:
+networks:
+  rede-controlflux:
+    driver: bridge
