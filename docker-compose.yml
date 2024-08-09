@@ -31,13 +31,12 @@ services:
     environment:
       - MONGODB=mongo
     volumes:
-      - nodered-volume:/data
+      - ./node-red/data:/data
     networks:
       - rede-controlflux
     restart: always
 volumes:
   mongo-volume:
-  nodered-volume:
 networks:
   rede-controlflux:
     driver: bridge
