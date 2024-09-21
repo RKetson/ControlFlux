@@ -23,6 +23,10 @@ Com o terminal aberto dentro da raiz do projeto, dê permissão para leitura e e
 
 `sudo chmod -R 777 ./node-red`
 
+Crie um arquivo de senhas para o mosquitto:
+
+`touch ./mosquitto/passwd`
+
 Em seguida suba e construa o container do servidor com:
 
 `docker compose up -d`
