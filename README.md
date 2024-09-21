@@ -25,7 +25,25 @@ Com o terminal aberto dentro da raiz do projeto, dê permissão para leitura e e
 
 Em seguida suba e construa o container do servidor com:
 
-`docker compose up`
+`docker compose up -d`
+
+Inicie um bash dentro do container do mosquitto:
+
+`docker exec -it <containder-id> sh`
+
+Altere as permissões do arquivo de senha e adicione ao grupo do mosquitto:
+
+`chmod 0700 /etc/mosquitto/passwd`
+
+`chown mosquitto: /etc/mosquitto/passwd`
+
+Se necessário adicione uma senha de sua preferência para o mqtt:
+
+`docker exec mosquitto mosquitto_passwd -b /etc/mosquitto/passwd <user> <password>`
+
+Reinicie o docker:
+
+`docker compose restart`
 
 ## Acesso
 
