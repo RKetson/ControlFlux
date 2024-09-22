@@ -31,4 +31,7 @@
 *.out
 *.app
 
-mosquitto/passwd
+.env
+
+mosquitto/password_file
+certs/*

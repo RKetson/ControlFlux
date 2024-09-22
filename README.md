@@ -23,9 +23,39 @@ Com o terminal aberto dentro da raiz do projeto, dê permissão para leitura e e
 
 `sudo chmod -R 777 ./node-red`
 
+Adicione certificado SSL para o mosquitto:
+
+`mkdir certs`
+
+`cd certs`
+
+`openssl genrsa -des3 -out ca.key 2048`
+
+`openssl req -new -key ca.key -out ca.csr -sha256`
+
+`openssl x509 -req -in ca.csr -signkey ca.key -out ca-root.crt -sha256`
+
+`openssl genrsa -out mosquitto.key 2048`
+
+Na proxima linha de comando, quando solicitado "Common Name", use "locahost":
+
+`openssl req -new -key mosquitto.key -out mosquitto.csr -sha256`
+
+`openssl x509 -req -in mosquitto.csr -CA ca-root.crt -CAkey ca.key -CAcreateserial -out mosquitto.crt`
+
 Crie um arquivo de senhas para o mosquitto:
 
-`touch ./mosquitto/passwd`
+`touch ./mosquitto/password_file`
+
+Crie um arquivo de variáveis de ambiente:
+
+`touch .env`
+
+Adicione o seu usuário e senha do mongo-express:
+
+`echo "ME_WEB_USERNAME=<your_user>" >> .env`
+
+`echo "ME_WEB_PASSWORD=<your_password>" >> .env`
 
 Em seguida suba e construa o container do servidor com:
 
@@ -37,13 +67,13 @@ Inicie um bash dentro do container do mosquitto:
 
 Altere as permissões do arquivo de senha e adicione ao grupo do mosquitto:
 
-`chmod 0700 /etc/mosquitto/passwd`
+`chmod 0700 /mosquitto/config/password_file`
 
-`chown mosquitto: /etc/mosquitto/passwd`
+`chown mosquitto: /mosquitto/config/password_file`
 
 Se necessário adicione uma senha de sua preferência para o mqtt:
 
-`docker exec mosquitto mosquitto_passwd -b /etc/mosquitto/passwd <user> <password>`
+`docker exec mosquitto mosquitto_passwd -b /mosquitto/config/password_file <user> <password>`
 
 Reinicie o docker:
 

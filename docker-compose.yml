@@ -5,13 +5,14 @@ services:
     container_name: mosquitto
     restart: unless-stopped
     ports:
-      - "1883:1883"
-      - "9001:9001"
+      - 1883:1883
+      - 8883:8883
     networks:
       - rede-controlflux
     volumes:
-      - ./mosquitto:/etc/mosquitto
-      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./mosquitto/password_file:/mosquitto/config/password_file:rw
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - ./certs:/mosquitto/config/certs
   mongo:
     image: mongo:4.2.18
     container_name: mongo
@@ -34,8 +35,10 @@ services:
     environment:
       - ME_CONFIG_MONGODB_SERVER=mongo
       - ME_CONFIG_MONGODB_PORT=27017
-      - ME_CONFIG_BASICAUTH_USERNAME=admin
-      - ME_CONFIG_BASICAUTH_PASSWORD=pass
+
+      - ME_CONFIG_BASICAUTH=true
+      - ME_CONFIG_BASICAUTH_USERNAME=$ME_WEB_USERNAME
+      - ME_CONFIG_BASICAUTH_PASSWORD=$ME_WEB_PASSWORD
   node-red:
     image: nodered/node-red:4.0.2-22
     container_name: app
