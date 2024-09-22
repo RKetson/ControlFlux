@@ -43,6 +43,22 @@ Na proxima linha de comando, quando solicitado "Common Name", use "locahost":
 
 `openssl x509 -req -in mosquitto.csr -CA ca-root.crt -CAkey ca.key -CAcreateserial -out mosquitto.crt`
 
+`openssl x509 -in ca.crt -out ca_cert.pem -outform PEM`
+
+`openssl x509 -in client_mqtt.crt -out client_mqtt_cert.pem -outform PEM`
+
+`cp client_mqtt.key client_mqtt_key.pem`
+
+Adicione as chaves no volume do node-red:
+
+`mkdir ../node-red/data/certs_SSL`
+
+`cp ca_cert.pem ../node-red/data/certs_SSL/`
+
+`cp mosquitto_key.pem ../node-red/data/certs_SSL/`
+
+`cp mosquitto_cert.pem ../node-red/data/certs_SSL/`
+
 Crie um arquivo de senhas para o mosquitto:
 
 `touch ./mosquitto/password_file`

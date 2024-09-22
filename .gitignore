@@ -35,3 +35,4 @@
 
 mosquitto/password_file
 certs/*
+node-red/data/certs_SSL/*
