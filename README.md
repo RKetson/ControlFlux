@@ -79,7 +79,7 @@ Em seguida suba e construa o container do servidor com:
 
 Inicie um bash dentro do container do mosquitto:
 
-`docker exec -it <containder-id> sh`
+`docker exec -it <containder-mosquitto-id> sh`
 
 Altere as permissões do arquivo de senha e adicione ao grupo do mosquitto:
 

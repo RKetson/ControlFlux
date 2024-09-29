@@ -1,0 +1,44 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.1
+2 info using node@v22.4.1
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/.npmrc
+5 silly config load:file:/usr/src/node-red/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install node-red-contrib-httpauth@1.0.12
+8 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--omit" "dev" "--engine-strict" "node-red-contrib-httpauth@1.0.12"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2024-09-29T21_03_50_548Z-
+10 verbose logfile /data/.npm/_logs/2024-09-29T21_03_50_548Z-debug-0.log
+11 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+12 silly logfile done cleaning log files
+13 silly idealTree buildDeps
+14 silly fetch manifest node-red-contrib-httpauth@1.0.12
+15 silly packumentCache full:https://registry.npmjs.org/node-red-contrib-httpauth cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/node-red-contrib-httpauth 94ms (cache hit)
+17 silly packumentCache full:https://registry.npmjs.org/node-red-contrib-httpauth set size:18400 disposed:false
+18 silly placeDep ROOT node-red-contrib-httpauth@1.0.12 OK for: node-red-project@0.0.1 want: 1.0.12
+19 verbose stack Error: Unsupported engine
+19 verbose stack     at checkEngine (/usr/local/lib/node_modules/npm/node_modules/npm-install-checks/lib/index.js:14:25)
+19 verbose stack     at #checkEngineAndPlatform (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:198:11)
+19 verbose stack     at Arborist.buildIdealTree (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:184:41)
+19 verbose stack     at async Promise.all (index 1)
+19 verbose stack     at async Arborist.reify (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:131:5)
+19 verbose stack     at async Install.exec (/usr/local/lib/node_modules/npm/lib/commands/install.js:150:5)
+19 verbose stack     at async Npm.exec (/usr/local/lib/node_modules/npm/lib/npm.js:207:9)
+19 verbose stack     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli/entry.js:74:5)
+20 verbose pkgid node-red-contrib-httpauth@1.0.12
+21 error code EBADENGINE
+22 error engine Unsupported engine
+23 error engine Not compatible with your version of node/npm: node-red-contrib-httpauth@1.0.12
+24 error notsup Not compatible with your version of node/npm: node-red-contrib-httpauth@1.0.12
+24 error notsup Required: {"node":"^0.12.7"}
+24 error notsup Actual:   {"npm":"10.8.1","node":"v22.4.1"}
+25 silly unfinished npm timer reify 1727643831121
+26 silly unfinished npm timer reify:loadTrees 1727643831128
+27 verbose cwd /data
+28 verbose os Linux 6.8.0-44-generic
+29 verbose node v22.4.1
+30 verbose npm  v10.8.1
+31 verbose exit 1
+32 verbose code 1
+33 error A complete log of this run can be found in: /data/.npm/_logs/2024-09-29T21_03_50_548Z-debug-0.log

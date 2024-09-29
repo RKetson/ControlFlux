@@ -41,7 +41,7 @@ module.exports = {
      * node-red from being able to decrypt your existing credentials and they will be
      * lost.
      */
-    //credentialSecret: "a-secret-key",
+    credentialSecret: "ControlFluxKey",
 
     /** By default, the flow JSON will be formatted over multiple lines making
      * it easier to compare changes when using version control.
@@ -81,6 +81,14 @@ module.exports = {
     //        permissions: "*"
     //    }]
     //},
+    adminAuth: {
+       type: "credentials",
+       users: [{
+           username: "admin",
+           password: "$2y$08$.EfbA4cpWT7wnXHtT4xF3eRAg96jw1aIGkm0BJcy.h4QUoWhmZoeu",
+           permissions: "*"
+       }]
+    },
 
     /** The following property can be used to enable HTTPS
      * This property can be either an object, containing both a (private) key
